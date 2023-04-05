@@ -1,26 +1,22 @@
 <template>
   <div class="main-layout">
-    <main class="app__content">
-      <div class="app__page">
+    <app-sidebar />
+
+    <main class="container">
+      <div class="page">
         <router-view />
       </div>
     </main>
-
-    <div class="">
-      <a @click.prevent="logout()">
-        <i class="ri-logout-box-r-line"></i>
-      </a>
-    </div>
   </div>
 </template>
 
 <script>
+import appSidebar from '@/components/appSidebar.vue'
 export default {
-  methods: {
-    logout () {
-      this.$router.push('/Login')
-      this.$store.dispatch('LOGOUT')
-    }
-  }
+  components: { appSidebar }
 }
 </script>
+
+<style lang="scss">
+
+</style>

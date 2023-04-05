@@ -4,8 +4,32 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    meta: { layout: 'main', auth: true, title: 'profile' },
+    meta: { layout: 'main', auth: true },
     component: () => import('../views/HomeView.vue')
+  },
+  {
+    path: '/Profile',
+    name: 'profile',
+    meta: { layout: 'main', auth: true },
+    component: () => import('../views/ProfView.vue')
+  },
+  {
+    path: '/Tiket',
+    name: 'Tiket',
+    meta: { layout: 'main', auth: true },
+    component: () => import('../views/TiketView.vue')
+  },
+  {
+    path: '/CreateTikets',
+    name: 'createTikets',
+    meta: { layout: 'main', auth: true },
+    component: () => import('../components/tiketsCreate.vue')
+  },
+  {
+    path: '/Setting',
+    name: 'setting',
+    meta: { layout: 'main', auth: true },
+    component: () => import('../views/SettingView.vue')
   },
   {
     path: '/Login',
@@ -18,12 +42,6 @@ const routes = [
     name: 'Register',
     meta: { layout: 'empty' },
     component: () => import('../views/RegisterView.vue')
-  },
-  {
-    path: '/Tiket',
-    name: 'Tiket',
-    meta: { layout: 'main', auth: true },
-    component: () => import('../views/TiketView.vue')
   }
 ]
 

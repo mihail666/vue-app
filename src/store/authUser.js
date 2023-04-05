@@ -27,7 +27,6 @@ export default {
       })
     },
     async REGISTER ({ commit, dispatch }, { email, name, surname, birthDate, city, password }) {
-      console.log(email, name, surname, birthDate, city, password)
       await createUserWithEmailAndPassword(auth, email, password)
       const uid = await dispatch('GET_UID')
       const db = getDatabase()
