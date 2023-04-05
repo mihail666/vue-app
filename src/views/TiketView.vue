@@ -9,14 +9,15 @@
 
 <script>
 import TiketsTable from '@/components/tiketsTable.vue'
-import { reactive } from 'vue'
-// import { useStore } from 'vuex'
+import { reactive, onMounted } from 'vue'
+import { useStore } from 'vuex'
 export default {
   name: 'TiketView',
   components: { TiketsTable },
   setup () {
-    // const store = useStore()
+    const store = useStore()
     const state = reactive({
+      arr: [],
       tiketsArr: [
         { title: '2', description: ' спи11111сок страни' },
         { title: '4', description: ' список страни' },
@@ -28,22 +29,21 @@ export default {
     // const categoriesArr = computed(() => store.getters.categories).value
     // const recordsArr = computed(() => store.getters.records).value
 
-    // onMounted(async () => {
-    //   await store.dispatch('GET_CATEGORIES')
-    //   await store.dispatch('GET_RECORDS')
-    //   if (recordsArr.length) {
-    //     state.newRecordArr = recordsArr.map(record => {
-    //       return {
-    //         ...record,
-    //         categoryName: categoriesArr.find(c => c.id === record.categoryId).title,
-    //         typeClass: record.type === 'income' ? 'green' : 'red',
-    //         typeText: record.type === 'income' ? 'Доход' : 'Расход',
-    //         filterDate: dateFilter(record.date, 'date time')
-    //       }
-    //     })
-    //     state.recordsNotNull = false
-    //   }
-    // })
+    onMounted(async () => {
+      await store.dispatch('GET_TIKET')
+      // if (recordsArr.length) {
+      //   state.newRecordArr = recordsArr.map(record => {
+      //     return {
+      //       ...record,
+      //       categoryName: categoriesArr.find(c => c.id === record.categoryId).title,
+      //       typeClass: record.type === 'income' ? 'green' : 'red',
+      //       typeText: record.type === 'income' ? 'Доход' : 'Расход',
+      //       filterDate: dateFilter(record.date, 'date time')
+      //     }
+      //   })
+      //   state.recordsNotNull = false
+      // }
+    })
     return {
       state
     }

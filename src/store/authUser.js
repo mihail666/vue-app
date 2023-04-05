@@ -2,12 +2,9 @@ import auth from '@/firebase'
 import { getDatabase, ref, set } from 'firebase/database'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth'
 export default {
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
+  state: {},
+  getters: {},
+  mutations: {},
   actions: {
     async LOGIN ({ commit, dispatch }, { email, password }) {
       await signInWithEmailAndPassword(auth, email, password).then(() => {
@@ -16,10 +13,12 @@ export default {
         commit('SET_ERROR', e)
         console.log(e)
       })
+      await dispatch('GET_INFO')
     },
     async LOGOUT ({ commit }) {
       await signOut(auth).then(() => {
         commit('CLEAR_INFO')
+        commit('CLEAR_TIKETS')
         console.log('LOGOUT')
       }).catch((e) => {
         commit('SET_ERROR', e)

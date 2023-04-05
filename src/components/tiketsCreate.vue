@@ -80,7 +80,6 @@ export default {
       }
 
       try {
-        console.log(formData)
         await this.$store.dispatch('CREATE_TIKET', formData)
         this.state.titleTiket = ''
         this.state.descTiket = ''

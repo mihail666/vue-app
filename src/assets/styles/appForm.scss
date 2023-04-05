@@ -61,6 +61,7 @@
     background: none;
     color: $white-color;
     position: relative;
+    cursor: pointer;
     z-index: 1;
   }
   &__textarea{
@@ -74,6 +75,7 @@
     color: $white-color;
     position: relative;
     z-index: 1;
+    cursor: pointer;
   }
   &__label-textarea {
     position: absolute;

@@ -1,8 +1,11 @@
 <template>
   <aside :class="`${is_expanded ? 'is-expanded' : ''}`">
     <div class="logo" @click="ToggleMenu">
-      <i class="ri-user-4-line"></i>
-      <span class="text-logo">user name</span>
+      <i class="ri-fire-fill"></i>
+      <div class="logo-info">
+        <div class="text-logo"></div>
+        <div class="text-logo"></div>
+      </div>
     </div>
 
     <div class="menu-toggle-wrap">
@@ -92,17 +95,21 @@ aside {
   }
 
   .logo {
+    display: flex;
     margin-bottom: 2rem;
+    align-items: flex-end;
 
     i {
-      font-size: 2rem;
+      color: $first-color;
+      font-size: 1.5rem;
       transition: 0.2s ease-in-out;
-      filter: invert(1);
-
       &:hover {
         filter: invert(15%);
       }
     }
+  }
+  .logo-info {
+    padding-block: .4rem;
   }
 
   .menu-toggle-wrap {
@@ -212,6 +219,9 @@ aside {
 
     .text-logo {
       opacity: 1;
+      color: $first-color;
+      font-size: $h3-font-size;
+      font-weight: $font-semi-bold;
     }
 
     .button {

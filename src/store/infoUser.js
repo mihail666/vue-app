@@ -1,17 +1,17 @@
 import { getDatabase, ref, child, get, update } from 'firebase/database'
 export default {
   state: {
-    info: {}
+    INFO: null
   },
   getters: {
-    info: s => s.info
+    INFO: s => s.INFO
   },
   mutations: {
     SET_INFO (state, info) {
-      state.info = info
+      state.INFO = info
     },
     CLEAR_INFO (state) {
-      state.info = {}
+      state.INFO = null
     }
   },
   actions: {

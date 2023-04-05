@@ -1,10 +1,18 @@
-import { getDatabase, ref, push, set } from 'firebase/database'
+import { getDatabase, ref, push, onValue, set } from 'firebase/database'
 export default {
   state: {
+    TIKETS: null
   },
   getters: {
+    TIKETS: s => s.TIKETS
   },
   mutations: {
+    SET_TIKETS (state, tiketsArr) {
+      state.TIKETS = tiketsArr
+    },
+    CLEAR_TIKETS (state, tiketsArr) {
+      state.TIKETS = tiketsArr
+    }
   },
   actions: {
     async CREATE_TIKET ({ commit, dispatch }, { titleTiket, descTiket }) {
@@ -19,18 +27,15 @@ export default {
         console.log(e)
       })
       console.log('CREATE_TIKET')
+    },
+    async GET_TIKET ({ commit, dispatch }) {
+      const db = getDatabase()
+      onValue(ref(db, 'tikets'), (snapshot) => {
+        const tikets = snapshot.val()
+        const tiketsArr = Object.keys(tikets).map(key => ({ ...tikets[key], id: key }))
+        commit('SET_TIKETS', tiketsArr)
+        console.log('GET_TIKET')
+      })
     }
-    // async CREATE_TIKET ({ commit, dispatch }, { title, description }) {
-    //   const uid = await dispatch('GET_UID')
-    //   const db = getDatabase()
-    //   set(push(ref(db, `users/${uid}/category`)), {
-    //     title: title,
-    //     description: description,
-    //     userID: uid
-    //   }).then(() => {
-    //     console.log('CREATE_TIKET')
-    //     // dispatch('GET_CATEGORIES')
-    //   })
-    // }
   }
 }
