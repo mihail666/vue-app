@@ -5,15 +5,10 @@
         <h1 class="home__title">
           Vue app
         </h1>
-
         <h3 class="home__prem">
           <i class="ri-fire-fill"></i> мини-личный кабинет
         </h3>
       </div>
-
-      <router-link to="/CreateTikets" class="home__button">
-        <i class="ri-add-line"></i>
-      </router-link>
 
       <h1 class="home__card-title"> My setup </h1>
       <div class="home__card">
@@ -65,6 +60,9 @@
       </div>
     </div>
   </section>
+  <router-link to="/CreateTikets" class="home__button">
+    <i class="ri-add-line"></i>
+  </router-link>
 </template>
 
 <script>
@@ -80,6 +78,7 @@ export default {
 
 .home {
   position: relative;
+  height: 100%;
 
   &__container {
     position: relative;
@@ -116,7 +115,7 @@ export default {
   }
 
   &__card {
-    width: 800px;
+    width: 80%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -184,7 +183,7 @@ export default {
     width: 70px;
     height: 70px;
     right: 3rem;
-    bottom: 0;
+    bottom: 3rem;
     border-radius: 50%;
     display: flex;
     justify-self: center;
