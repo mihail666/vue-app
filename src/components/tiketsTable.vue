@@ -18,11 +18,11 @@
         </button>
       </li>
     </ul>
-    <div class="table__pagination">
-      <div class="table__page-number" v-for="p in pages" :key="p" :class="{ 'table__page-selected': p === state.pageNumber }"
-        @click="nextPage(p)">
-        {{ p }}
-      </div>
+  </div>
+  <div class="table__pagination">
+    <div class="table__page-number" v-for="p in pages" :key="p" :class="{ 'table__page-selected': p === state.pageNumber }"
+      @click="nextPage(p)">
+      {{ p }}
     </div>
   </div>
 </template>
@@ -33,9 +33,9 @@ export default {
   setup (props) {
     const state = reactive({
       pageNumber: 1,
-      perPage: 4
+      perPage: 5
     })
-    const pages = computed(() => { return Math.ceil(props.tiketsArr.length / 3) })
+    const pages = computed(() => { return Math.ceil(props.tiketsArr.length / 5) })
     const paginatedTikets = computed(() => {
       const from = (state.pageNumber - 1) * state.perPage
       const to = from + state.perPage
@@ -62,7 +62,7 @@ export default {
 
   &__container {
     max-width: 1024px;
-    min-height: 80vh;
+    min-height: 70vh;
     margin-top: 2rem;
     margin-left: auto;
     margin-right: auto;
@@ -142,8 +142,10 @@ export default {
   }
 
   &__pagination {
-    margin-top: 1rem;
-    bottom: 0;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 10px;
+    left: 24.1%;
     display: flex;
     gap: 1rem;
   }

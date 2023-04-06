@@ -172,3 +172,54 @@
   left: -1rem;
   top: -2rem;
 }
+
+// select
+.auth__select{
+  position: relative;
+  display: block;
+  padding-block: .9rem;
+  cursor: pointer;
+  width: 100%;
+  i{
+    position: absolute;
+    top: 14px;
+    right: 0;
+    transition: .3s;
+  }
+}
+.auth__select-title{
+  display: block;
+  transition: .3s;
+}
+.auth__select-options {
+  width: 100%;
+  display: block;
+  background: rgba(43, 45, 48, 0.4);
+  backdrop-filter: blur(7px);
+  position: absolute;
+  max-height: 330px;
+  width: 114%;
+  z-index: 20;
+  border-radius: 1rem;
+  padding: 1.3rem 2rem;
+  left: -34px;
+  top: 3.5rem;
+  overflow-y: scroll;
+  p {
+    padding: 0.7rem;
+    border-radius: .5rem;
+    transition: .3s;
+  }
+  p:hover{
+    background-color: hsla(225, 4%, 20%, 0.4);
+    backdrop-filter: blur(7px);
+    color: $first-color;
+    transform: translateX(0.5rem);
+  }
+}
+.auth__iconDown {
+  transform: rotate(90deg);
+}
+.auth__select-title:hover .auth__icon {
+  transform: rotate(90deg);
+}

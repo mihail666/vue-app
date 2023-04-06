@@ -66,6 +66,9 @@ export default {
       this.is_expanded = !this.is_expanded
       this.$emit('toggleMenu')
     },
+    hideMehu () {
+      this.is_expanded = false
+    },
     logout () {
       this.$router.push('/Login')
       this.$store.dispatch('LOGOUT')
@@ -103,7 +106,7 @@ aside {
     margin-bottom: 2rem;
     align-items: flex-end;
     i {
-      margin-left: 3px;
+      margin-left: 5px;
       color: $first-color;
       font-size: 1.5rem;
       transition: 0.3s ease-in-out;

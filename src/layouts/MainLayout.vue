@@ -6,10 +6,10 @@
         :userInfo="INFO"
         @toggleMenu="addFull()"/>
 
-      <main
-        class="container"
-        :class="{full: fullSize }"
-      >
+      <main class="container" :class="{full: fullSize }">
+        <div class="shape shape__big"></div>
+        <div class="shape shape__small"></div>
+
         <div class="page">
           <router-view />
         </div>
@@ -51,5 +51,19 @@ export default {
 </script>
 
 <style lang="scss">
+.container .shape__big,
+.container .shape__small {
+  position: absolute;
+  z-index: -1;
+}
 
+.container .shape__big {
+  left: -10rem;
+  top: -5rem;
+}
+
+.container .shape__small {
+  right: 1rem;
+  bottom: 3rem;
+}
 </style>
