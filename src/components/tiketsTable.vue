@@ -69,6 +69,7 @@ export default {
   }
 
   &__content {
+    height: 100%;
     li {
       border-radius: 3px;
       padding: 25px 30px;
@@ -86,6 +87,7 @@ export default {
       font-size: $h2-font-size;
       text-transform: uppercase;
       letter-spacing: 0.03em;
+      align-items: center;
     }
 
     .table__row {
@@ -141,7 +143,6 @@ export default {
 
   &__pagination {
     margin-top: 1rem;
-    position: absolute;
     bottom: 0;
     display: flex;
     gap: 1rem;

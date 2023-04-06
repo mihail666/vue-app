@@ -15,7 +15,18 @@
               placeholder=" "
               v-model="state.email"
             >
-            <label for='' class="auth__label">E-mail</label>
+            <label for='' class="auth__label">E-mail
+              <small
+                class="auth__helper-text invalid"
+                v-if="v$.email.$dirty && v$.email.required.$invalid"
+              > should not be empty
+              </small>
+              <small
+                class="helper-text invalid"
+                v-else-if="v$.email.$dirty && v$.email.email.$invalid"
+              > is incorrect
+              </small>
+            </label>
           </div>
         </div>
 
@@ -28,7 +39,13 @@
               placeholder=" "
               v-model="state.name"
             >
-            <label for='' class="auth__label">Name</label>
+            <label for='' class="auth__label">Name
+              <small
+                class="appForm__helper-text invalid"
+                v-if="v$.name.$dirty && v$.name.required.$invalid"
+              > should not be empty
+              </small>
+            </label>
           </div>
         </div>
 
@@ -41,7 +58,13 @@
               placeholder=" "
               v-model="state.surname"
             >
-            <label for='' class="auth__label">Surname</label>
+            <label for='' class="auth__label">Surname
+              <small
+                class="appForm__helper-text invalid"
+                v-if="v$.surname.$dirty && v$.surname.required.$invalid"
+              > should not be empty
+              </small>
+            </label>
           </div>
         </div>
 
@@ -54,24 +77,31 @@
               placeholder=" "
               v-model="state.birthDate"
             >
-            <label for='' class="auth__label">birth date</label>
+            <label for='' class="auth__label">birth date
+              <small
+                class="appForm__helper-text invalid"
+                v-if="v$.birthDate.$dirty && v$.birthDate.required.$invalid"
+              > should not be empty
+              </small>
+            </label>
           </div>
         </div>
 
         <div class="auth__box">
           <i class="ri-building-2-line auth__icon"></i>
           <div class="auth__box-input">
-            <select
-              type="text"
-              class="auth__input"
-              placeholder=" "
-              v-model="state.city"
-            >
-              <option >Oren</option>
-              <option >SPB</option>
-              <option >Moscl</option>
-            </select>
-            <label for='' class="auth__label">Your city</label>
+
+            <div class="auth__select">
+              <p class="auth__select-title select-btn" @click="state.visible = !state.visible">
+                {{ state.city }}
+                <i class="ri-arrow-right-double-line auth__icon" :class="{ auth__iconDown: state.visible }"></i>
+              </p>
+            <div class="auth__select-options" v-if="state.visible">
+              <p class="" v-for="c in cities" :key="c.id" @click="selectCity(c)">
+                {{ c }}
+              </p>
+            </div>
+            </div>
           </div>
         </div>
 
@@ -82,10 +112,17 @@
               id="inputPas"
               type="password"
               class="auth__input"
+              autocomplete="current-password webauthn"
               placeholder=" "
               v-model="state.password"
             >
-            <label for="" class="auth__label">Password</label>
+            <label for="" class="auth__label">Password
+              <small
+                class="helper-text invalid"
+                v-if="v$.password.$dirty && v$.password.minLength.$invalid"
+              > must be {{ v$.password.minLength.$params.min }} characters. Now {{ state.password.length }}
+              </small>
+            </label>
             <div @click="showHiddenPas()">
               <i class="ri-eye-off-line auth__icon-eye" id="iconEye"></i>
             </div>
@@ -99,10 +136,17 @@
               id="inputPas2"
               type="password"
               class="auth__input"
+              autocomplete="current-password webauthn"
               placeholder=" "
               v-model="state.repeatPassword"
             >
-            <label for="" class="auth__label">Repeat password</label>
+            <label for="" class="auth__label">Repeat password
+              <small
+                class="helper-text invalid"
+                v-if="v$.repeatPassword.$dirty && v$.repeatPassword.$invalid && state.password != state.repeatPassword"
+              > incorrect
+              </small>
+            </label>
           </div>
         </div>
 
@@ -139,21 +183,29 @@ export default {
   name: 'RegisterView',
   setup () {
     const state = reactive({
+      visible: false,
       email: '',
       name: '',
       surname: '',
       birthDate: '',
-      city: '',
       password: '',
       repeatPassword: '',
-      proof: ''
+      proof: '',
+      city: 'Your city'
     })
     const rules = {
       password: { required, minLength: minLength(8) },
-      email: { required, email }
+      repeatPassword: { required },
+      email: { required, email },
+      name: { required },
+      surname: { required },
+      birthDate: { required },
+      city: { required },
+      proof: { required }
     }
     const v$ = useVuelidate(rules, state)
-    return { state, v$ }
+    const cities = ['Moscow', 'Orenburg', 'Rostov', 'Orsk', 'Saint Petersburg', 'Voronezh', 'Sorochinsk', 'Samara', 'Ufar']
+    return { state, v$, cities }
   },
   data: () => ({}),
   methods: {
@@ -178,6 +230,10 @@ export default {
     },
     showHiddenPas () {
       this.$store.dispatch('showRegPas')
+    },
+    selectCity (c) {
+      this.state.city = c
+      this.state.visible = false
     }
   }
 }

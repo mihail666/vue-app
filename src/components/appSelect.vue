@@ -36,12 +36,12 @@ export default {
     }
   },
   data: () => ({
-    visible: false
+    visible: true
   }),
   methods: {
     selectParameter (p) {
       this.$emit('selectParameter', p)
-      this.visible = false
+      this.visible = !this.visible
     }
   }
 }
