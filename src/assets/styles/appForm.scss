@@ -2,12 +2,10 @@
   position: relative;
 
   &__form {
-    max-width: 600px;
     position: relative;
     background-color: $container-color;
     padding: 4.5rem 3.5rem;
     border-radius: 1rem;
-    margin-inline: 2.5rem;
     overflow: hidden;
   }
 
@@ -42,7 +40,6 @@
     &:nth-child(2) input {
       padding-right: 2rem;
     }
-    
   }
 
   &__icon {

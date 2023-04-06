@@ -1,43 +1,46 @@
 <template>
   <div class="profile">
-    <h1>Profile</h1>
     <div class="profile__container grid">
-      <div class="profile__card" v-for="u in userInfo" :key="u.id">
+      <h1>Profile</h1>
+      <div class="profile__card">
         <h1 class="profile__title">Info</h1>
 
         <div class="profile__data">
 
           <div class="profile__data-group">
-            <i class="ri-user-shared-line auth__icon"></i>
-            <h2 class="profile__subtitle">{{ u.name }} {{ u.surName }}</h2>
+            <div class="profile__img">
+              <img src="@/assets/ava.jpg" alt="">
+              <i class="ri-user-3-line pofile__icon"></i>
+            </div>
+            <h2 class="profile__subtitle">{{ INFO.userName }} {{ INFO.userSurname }}</h2>
           </div>
 
           <div class="profile__data-group">
-            <i class="ri-mail-add-line profile__icon"></i> E-mail: {{ u.Email }}
+            <i class="ri-mail-add-line profile__icon"></i> E-mail: {{ INFO.email }}
           </div>
 
           <div class="profile__data-group">
-            <i class="ri-cake-2-line profile__icon"></i> Birth date: {{ u.birthDate }}
+            <i class="ri-cake-2-line profile__icon"></i> Birth date: {{ INFO.birthDate }}
           </div>
 
           <div class="profile__data-group">
-            <i class="ri-building-2-line profile__icon"></i> City: {{ u.city }}
+            <i class="ri-building-2-line profile__icon"></i> City: {{ INFO.city }}
           </div>
 
         </div>
       </div>
-      <app-select
+    </div>
+    <app-select
         :parameters="cities"
         :selectedPar="city"
         @selectParameter="selectCity"
       />
-    </div>
   </div>
 </template>
 
 <script>
 import AppSelect from '@/components/appSelect.vue'
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'ProfileView',
   components: { AppSelect },
@@ -51,10 +54,20 @@ export default {
     visible: false,
     city: 'Your city'
   }),
+  computed: {
+    ...mapGetters([
+      'INFO'
+    ])
+  },
   methods: {
     selectCity (p) {
       this.city = p
     }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.loading = false
+    }, 1500)
   }
 }
 </script>
@@ -63,13 +76,14 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .profile {
-  &__container {
-    padding-top: 2rem;
-  }
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 
   &__card {
     position: relative;
     width: 400px;
+    height: 400px;
     background-color: $container-color;
     padding: 2rem 1.5rem 1.5rem;
     border-radius: 1rem;
@@ -110,6 +124,28 @@ export default {
 
     i {
       font-size: 1.4rem;
+    }
+  }
+  &__img {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: $first-color-alt;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    z-index: 1;
+    i {
+      position: absolute;
+      font-size: 4rem;
+      z-index: 2;
+    }
+    img {
+      object-fit: contain;
+      border-radius: 50%;
+      z-index: 3;
     }
   }
 }

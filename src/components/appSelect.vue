@@ -1,7 +1,7 @@
 <template>
   <div class="app-select">
-    <h1>Select</h1>
     <div class="app-select__container grid">
+      <h1>Select</h1>
       <div class="app-select__card">
         <h1 class="app-select__title">Сhoose a city</h1>
           <div class="app-select__input" @click="visible = !visible">
@@ -51,14 +51,11 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .app-select {
-  &__container {
-    padding-top: 2rem;
-    width: 100%;
-  }
 
   &__card {
     position: relative;
     width: 400px;
+    max-height: 400px;
     background-color: $container-color;
     padding: 2rem 1.5rem 1.5rem;
     border-radius: 1rem;
@@ -72,8 +69,8 @@ export default {
 
   &__title {
     font-size: $h1-font-size;
-    margin-bottom: 1rem;
     padding-bottom: .5rem;
+    margin-bottom: 1rem;
     border-bottom: 3px solid hsl(219, 4%, 20%);
   }
 
@@ -98,17 +95,20 @@ export default {
   &__data {
     display: grid;
     grid-template-columns: repeat(1, max-content);
-    gap: .5rem 1.25rem;
+    gap: .5rem 0rem;
     margin: 1rem 0;
+    height: 100%;
+    overflow: scroll;
   }
 
   &__data-option {
-    width: 350px;
+    width: 300px;
     padding: .7rem;
     font-size: $normal-font-size;
     color: $white-color;
     border-radius: .3rem;
     transition: .3s;
+    cursor: pointer;
     &:hover{
       background-color: hsl(219, 4%, 20%);
       color: $first-color;

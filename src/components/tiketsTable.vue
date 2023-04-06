@@ -18,11 +18,8 @@
         </button>
       </li>
     </ul>
-  </div>
-
-  <div class="">
     <div class="table__pagination">
-      <div class="table__page-number" v-for="p in pages" :key="p" :class="{ 'crm-page_selected': p === state.pageNumber }"
+      <div class="table__page-number" v-for="p in pages" :key="p" :class="{ 'table__page-selected': p === state.pageNumber }"
         @click="nextPage(p)">
         {{ p }}
       </div>
@@ -36,16 +33,15 @@ export default {
   setup (props) {
     const state = reactive({
       pageNumber: 1,
-      perPage: 2
+      perPage: 4
     })
-    const pages = computed(() => { return Math.ceil(props.tiketsArr.length / 2) })
+    const pages = computed(() => { return Math.ceil(props.tiketsArr.length / 3) })
     const paginatedTikets = computed(() => {
       const from = (state.pageNumber - 1) * state.perPage
       const to = from + state.perPage
       return props.tiketsArr.slice(from, to)
     })
     function nextPage (page) {
-      console.log(page)
       state.pageNumber = page
     }
     return { state, pages, paginatedTikets, nextPage }
@@ -65,7 +61,8 @@ export default {
   position: relative;
 
   &__container {
-    max-width: 1800px;
+    max-width: 1024px;
+    min-height: 80vh;
     margin-top: 2rem;
     margin-left: auto;
     margin-right: auto;
@@ -84,8 +81,9 @@ export default {
     }
 
     .table__header {
+      color: $first-color;
       background-color: $container-color;
-      font-size: 14px;
+      font-size: $h2-font-size;
       text-transform: uppercase;
       letter-spacing: 0.03em;
     }
@@ -93,7 +91,18 @@ export default {
     .table__row {
       background-color: $container-color;
       box-shadow: 0px 0px 2px 1px hsl(219, 4%, 20%);
-
+      cursor: pointer;
+      transition: .3s;
+      &:hover {
+        scale: (1.01);
+        box-shadow: 0px 0px 2px 1px $first-color;
+        transform: translateY(-.5rem);
+      }
+      &:hover .table__btn {
+        color: $first-color;
+        scale: (1.1);
+        transform: translateX(.5rem);
+      }
     }
     .col-1 {
       min-width: 30px;
@@ -101,6 +110,7 @@ export default {
     }
 
     .col-2 {
+      min-width: 150px;
       flex-basis: 20%;
     }
 
@@ -114,11 +124,9 @@ export default {
     .col-1,
     .col-2,
     .col-3 {
-      margin: 0 .5rem;
-      border-right: 3px solid hsl(219, 4%, 20%);
+      padding: 0 1rem;
     }
     .col-4 {
-      margin: 0 .5rem;
       text-align: center;
     }
     .table__btn{
@@ -127,13 +135,14 @@ export default {
       color: $white-color;
       font-size: 1.4rem;
       cursor: pointer;
+      transition: .3s;
     }
   }
 
   &__pagination {
+    margin-top: 1rem;
     position: absolute;
     bottom: 0;
-    margin-bottom: 2rem;
     display: flex;
     gap: 1rem;
   }

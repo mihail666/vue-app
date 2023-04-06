@@ -1,7 +1,7 @@
-import { getDatabase, ref, child, get, update } from 'firebase/database'
+import { getDatabase, ref, child, get } from 'firebase/database'
 export default {
   state: {
-    INFO: null
+    INFO: {}
   },
   getters: {
     INFO: s => s.INFO
@@ -11,7 +11,7 @@ export default {
       state.INFO = info
     },
     CLEAR_INFO (state) {
-      state.INFO = null
+      state.INFO = {}
     }
   },
   actions: {
@@ -22,21 +22,11 @@ export default {
         if (snapshot.exists()) {
           const info = snapshot.val()
           commit('SET_INFO', info)
+          console.log('GET_INFO')
         } else {
           console.log('No data available')
         }
       }).catch((e) => {})
-    },
-    async UPDATE_INFO ({ commit, dispatch, getters }, toUpdate) {
-      const uid = await dispatch('GET_UID')
-      const db = getDatabase()
-      const updateData = { ...getters.info, ...toUpdate }
-      update(ref(db, `/users/${uid}/info`), updateData).then(() => {
-        commit('SET_INFO', updateData)
-      }).catch((e) => {
-        commit('SET_ERROR', e)
-        throw e
-      })
     }
   }
 }

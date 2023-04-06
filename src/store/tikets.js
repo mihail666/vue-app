@@ -1,7 +1,7 @@
 import { getDatabase, ref, push, onValue, set } from 'firebase/database'
 export default {
   state: {
-    TIKETS: null
+    TIKETS: {}
   },
   getters: {
     TIKETS: s => s.TIKETS
@@ -10,8 +10,8 @@ export default {
     SET_TIKETS (state, tiketsArr) {
       state.TIKETS = tiketsArr
     },
-    CLEAR_TIKETS (state, tiketsArr) {
-      state.TIKETS = tiketsArr
+    CLEAR_TIKETS (state) {
+      state.TIKETS = {}
     }
   },
   actions: {
@@ -28,7 +28,7 @@ export default {
       })
       console.log('CREATE_TIKET')
     },
-    async GET_TIKET ({ commit, dispatch }) {
+    async GET_TIKETS ({ commit }) {
       const db = getDatabase()
       onValue(ref(db, 'tikets'), (snapshot) => {
         const tikets = snapshot.val()

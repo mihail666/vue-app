@@ -6,14 +6,13 @@ export default {
   getters: {},
   mutations: {},
   actions: {
-    async LOGIN ({ commit, dispatch }, { email, password }) {
+    async LOGIN ({ commit }, { email, password }) {
       await signInWithEmailAndPassword(auth, email, password).then(() => {
         console.log('LOGIN')
       }).catch((e) => {
         commit('SET_ERROR', e)
         console.log(e)
       })
-      await dispatch('GET_INFO')
     },
     async LOGOUT ({ commit }) {
       await signOut(auth).then(() => {

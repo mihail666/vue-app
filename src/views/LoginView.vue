@@ -38,6 +38,7 @@
               id="inputPas3"
               type="password"
               class="auth__input"
+              autocomplete="current-password webauthn"
               placeholder=" "
               v-model="state.password"
             >
